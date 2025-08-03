@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawrence Salazar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-container">
+                    <svg class="logo-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <path class="logo-path" d="M15 35 C 20 35, 20 15, 25 15 S 30 35, 35 35" stroke="currentColor" fill="none" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="grid-background"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="greeting">Hello, I'm</span>
+                        <span class="name">Lawrence</span>
+                    </h1>
+                    <p class="hero-description">
+                        I am a cloud engineer, problem solver, system debugger, automation enthusiast, and lifelong learner.<br>This is my personal space, where I share my work and projects.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="code-title">infrastructure.tf</span>
+                        </div>
+                        <pre class="code-content">
+<span class="code-comment"># Deploying resilient infrastructure</span>
+<span class="code-keyword">resource</span> <span class="code-string">"aws_instance"</span> <span class="code-string">"web_server"</span> {
+  <span class="code-property">ami</span>           = <span class="code-string">"ami-0c55b159cbfafe1f0"</span>
+  <span class="code-property">instance_type</span> = <span class="code-string">"t3.medium"</span>
+  
+  <span class="code-keyword">tags</span> = {
+    <span class="code-property">Name</span>        = <span class="code-string">"production-web"</span>
+    <span class="code-property">Environment</span> = <span class="code-string">"production"</span>
+    <span class="code-property">ManagedBy</span>   = <span class="code-string">"terraform"</span>
+  }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                        Based in Manila, I bring 4 years of experience in ensuring systems stay operational at scale.
+                    </p>
+                    <p class="about-description">
+                        My journey has taken me from mainframe development at Accenture to cloud operations at TELUS,
+                        and now to traffic engineering at OpsWerks. Along the way, I've earned certifications in AWS
+                        and GCP, deployed infrastructure across continents, and learned that the best solutions often
+                        come at 3am with a fresh perspective.
+                    </p>
+                    <p class="about-description">
+                        This is my corner of the internet to document my work and share lessons learned from the front lines of site reliability engineering.
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Certifications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Companies</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="job-title">Site Reliability Engineer</h3>
+                            <span class="job-company">OpsWerks</span>
+                            <span class="job-duration">Aug 2024 – Present</span>
+                        </div>
+                        <div class="job-description">
+                            <h4>Traffic Engineering (Production & Non-Production Support)</h4>
+                            <ul>
+                                <li>Maintained reliability, performance, and scalability of large-scale traffic routing infrastructure for a Fortune 100 Fintech company</li>
+                                <li>Diagnosed and resolved complex traffic routing issues across environments, ensuring end-to-end request integrity from L4 load balancers through L7 Envoy service mesh</li>
+                                <li>Enhanced system observability by building custom alerts and dashboards in Prometheus, Grafana, and Splunk</li>
+                                <li>Maintained Infrastructure as Code using Terraform and Terragrunt for scalable deployments</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <h5>Key Accomplishment: China Deployment</h5>
+                                <ul>
+                                    <li><strong>Load Balancer Refresh:</strong> Contributed to migration from NetScaler to internal NGINX-based reverse proxy system</li>
+                                    <li><strong>Hybrid Cloud Migration:</strong> Assisted in moving core payment applications to modern hybrid AliCloud architecture</li>
+                                </ul>
+                            </div>
+                            <h4>Dev-to-Production (D2P) Support</h4>
+                            <ul>
+                                <li>Ensured operational health of non-production services in HashiCorp Nomad environment</li>
+                                <li>Maintained high availability by responding to alerts and resolving resource contention issues</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="job-title">Operations Specialist III</h3>
+                            <span class="job-company">TELUS International Philippines</span>
+                            <span class="job-duration">Aug 2023 – Aug 2024</span>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Provided technical support for Google Cloud Platform products, solutions, and APIs</li>
+                                <li>Identified and documented product bugs and feature requests</li>
+                                <li>Worked at a senior level to improve cloud products, suggesting and implementing code changes</li>
+                                <li>Achieved exceptional KPI scores with 3.53/4.0 average</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="job-title">Associate Software Engineer</h3>
+                            <span class="job-company">Accenture Inc.</span>
+                            <span class="job-duration">Aug 2021 – Jan 2023</span>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Handled service desk tickets using COBOL, JCL, and SQL through IBM DB2 Mainframe</li>
+                                <li>Consistently exceeded daily ticket resolution targets</li>
+                                <li>Served as functional tester, presenting test results directly to client executives</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS (Solutions Architect)</span>
+                        <span class="skill-tag">GCP (Cloud Architect)</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Infrastructure as Code</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Terragrunt</span>
+                        <span class="skill-tag">Karpenter</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>Containerization</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Nomad</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Monitoring & Observability</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">Splunk</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Networking & Service Mesh</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Nginx</span>
+                        <span class="skill-tag">NetScaler</span>
+                        <span class="skill-tag">Consul</span>
+                        <span class="skill-tag">Envoy</span>
+                        <span class="skill-tag">TCP/IP</span>
+                        <span class="skill-tag">DNS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <h3>Languages & OS</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">macOS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-icon gcp">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h4>Google Cloud Professional Cloud Architect</h4>
+                    <span class="cert-date">September 2024</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon gcp">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h4>Google Cloud Associate Cloud Engineer</h4>
+                    <span class="cert-date">March 2024</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon professional">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4>Licensed Electronics Engineer</h4>
+                    <span class="cert-date">April 2023</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon aws">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <h4>AWS Certified Solutions Architect – Associate</h4>
+                    <span class="cert-date">November 2022</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon aws">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <h4>AWS Certified Cloud Practitioner</h4>
+                    <span class="cert-date">October 2022</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon professional">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h4>Civil Service Professional</h4>
+                    <span class="cert-date">May 2017</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <p class="contact-text">
+                    I'm always interested in hearing about new opportunities and challenges. Feel free to reach out. :)
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:SalazarLawrence@outlook.com" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email Me</span>
+                    </a>
+                    <a href="https://linkedin.com/in/salazarlawrence" target="_blank" class="contact-link">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="tel:+639762318156" class="contact-link">
+                        <i class="fas fa-phone"></i>
+                        <span>Call Me</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Lawrence Nelson Salazar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
