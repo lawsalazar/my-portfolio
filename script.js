@@ -192,9 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Interactive SRE Command Line Terminal Simulation
 const terminalCommands = [
-    { type: 'input', text: 'ssh lawrence@salazar.ops' },
-    { type: 'output', text: 'Connecting to salazar.ops (10.0.8.24) on port 22...', class: 'log-info' },
-    { type: 'output', text: 'Connection established. Welcome to Lawrence Salazar\'s server!', class: 'log-success' },
+    { type: 'input', text: 'ssh lawrence@ops.local' },
+    { type: 'output', text: 'Connecting to ops.local (10.0.8.24) on port 22...', class: 'log-info' },
+    { type: 'output', text: 'Connection established. Welcome to Lawrence\'s server!', class: 'log-success' },
     { type: 'output', text: 'Last login: Wed May 20 20:41:23 2026 from 192.168.1.100', class: 'log-gray' },
     { type: 'input', text: 'sre-agent --status' },
     { type: 'output', text: '[INFO] Initializing telemetry analysis...', class: 'log-info' },
@@ -240,7 +240,7 @@ const startTerminalEngine = () => {
         if (lineData.type === 'input') {
             const promptSpan = document.createElement('span');
             promptSpan.className = 'terminal-prompt';
-            promptSpan.textContent = '[guest@salazar-ops ~]$ ';
+            promptSpan.textContent = '[guest@ops-local ~]$ ';
             lineElement.appendChild(promptSpan);
             
             const inputSpan = document.createElement('span');
@@ -309,7 +309,7 @@ window.addEventListener('scroll', () => {
 
 // Easter Egg for Developers
 console.log(
-    '%c🚀 salazar.ops status: active',
+    '%c🚀 ops.local status: active',
     'font-family: monospace; font-size: 16px; font-weight: bold; color: #00f2fe; background-color: #05070c; padding: 4px 8px; border-radius: 4px;'
 );
 console.log(
