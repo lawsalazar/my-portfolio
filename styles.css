@@ -1382,6 +1382,43 @@ button:focus-visible {
     outline-offset: 4px;
 }
 
+/* Antigravity Moving Background Orbs */
+.antigravity-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.12;
+    will-change: transform;
+    pointer-events: none;
+}
+
+.orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+    top: 10%;
+    left: 5%;
+}
+
+.orb-2 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
+    bottom: 10%;
+    right: 5%;
+}
+
 /* Accessibility: Reduced Motion overrides */
 @media (prefers-reduced-motion: reduce) {
     * {

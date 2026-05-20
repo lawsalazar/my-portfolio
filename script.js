@@ -292,9 +292,43 @@ const startTerminalEngine = () => {
     runSequence();
 };
 
-// Initialize SRE Interactive Terminal Engine on load
+// Interactive Mouse-Reactive Parallax Background (Antigravity Style)
+const initAntigravityBackground = () => {
+    const orb1 = document.querySelector('.orb-1');
+    const orb2 = document.querySelector('.orb-2');
+    if (!orb1 || !orb2) return;
+
+    let mouseX = 0, mouseY = 0;
+    let curX1 = 0, curY1 = 0;
+    let curX2 = 0, curY2 = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        // Normalize mouse coordinates around the window center (-0.5 to 0.5)
+        mouseX = (e.clientX / window.innerWidth) - 0.5;
+        mouseY = (e.clientY / window.innerHeight) - 0.5;
+    });
+
+    const tick = () => {
+        // Smooth spring physics interpolation (damping lag)
+        curX1 += (mouseX * 90 - curX1) * 0.06;
+        curY1 += (mouseY * 90 - curY1) * 0.06;
+
+        curX2 += (-mouseX * 130 - curX2) * 0.04;
+        curY2 += (-mouseY * 130 - curY2) * 0.04;
+
+        // Apply high-performance 3D transforms
+        orb1.style.transform = `translate3d(${curX1}px, ${curY1}px, 0)`;
+        orb2.style.transform = `translate3d(${curX2}px, ${curY2}px, 0)`;
+
+        requestAnimationFrame(tick);
+    };
+    tick();
+};
+
+// Initialize SRE Interactive Terminal Engine and Background on load
 window.addEventListener('load', () => {
     startTerminalEngine();
+    initAntigravityBackground();
 });
 
 // Dynamic Parallax for grid overlay background
