@@ -1,25 +1,32 @@
-l// Mobile Navigation Toggle
+// ==========================================================================
+// JS ENGINE - Portfolio Redesign Interactivity
+// ==========================================================================
+
+// Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
     });
-});
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+}
 
 // Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
         if (target) {
             const offset = 80; // Height of navbar
             const targetPosition = target.offsetTop - offset;
@@ -31,15 +38,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Active Navigation Link Highlighting
+// Active Navigation Link Highlighting on Scroll
 const sections = document.querySelectorAll('section');
 const navItems = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
+    const scrollY = window.pageYOffset;
     
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
+        const sectionTop = section.offsetTop - 120;
         const sectionHeight = section.clientHeight;
         
         if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
@@ -49,27 +57,31 @@ window.addEventListener('scroll', () => {
     
     navItems.forEach(item => {
         item.classList.remove('active');
-        if (item.getAttribute('href').slice(1) === current) {
+        const itemHref = item.getAttribute('href').slice(1);
+        if (itemHref === current) {
             item.classList.add('active');
         }
     });
 });
 
-// Navbar Background on Scroll
+// Navbar Styling Shift on Scroll
 const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+    if (window.scrollY > 80) {
+        navbar.style.background = 'rgba(5, 7, 12, 0.9)';
+        navbar.style.borderBottomColor = 'rgba(0, 242, 254, 0.1)';
+        navbar.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.5)';
     } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.8)';
+        navbar.style.background = 'rgba(5, 7, 12, 0.75)';
+        navbar.style.borderBottomColor = 'rgba(255, 255, 255, 0.05)';
         navbar.style.boxShadow = 'none';
     }
 });
 
-// Typing Animation for Hero Section
-const typeWriter = (element, text, speed = 100) => {
+// Typewriter Effect for the Hero Title
+const typeWriter = (element, text, speed = 80) => {
+    if (!element) return;
     let i = 0;
     element.textContent = '';
     
@@ -84,19 +96,55 @@ const typeWriter = (element, text, speed = 100) => {
     type();
 };
 
-// Initialize typing animation on load
 window.addEventListener('load', () => {
     const nameElement = document.querySelector('.name');
     if (nameElement) {
         const originalText = nameElement.textContent;
-        typeWriter(nameElement, originalText, 80);
+        typeWriter(nameElement, originalText, 60);
     }
 });
 
-// Intersection Observer for Animations
+// Count Up Stat Counter Engine
+const animateCounters = () => {
+    const counters = document.querySelectorAll('.stat-number');
+    const duration = 1200; // total duration of counting in ms
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'), 10);
+        const start = 0;
+        let startTime = null;
+        
+        const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const currentVal = Math.floor(progress * (target - start) + start);
+            
+            if (target === 4) {
+                counter.textContent = currentVal + '+';
+            } else if (target === 6) {
+                counter.textContent = currentVal + ' ';
+            } else {
+                counter.textContent = currentVal + ' ';
+            }
+            
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                // Ensure correct final text tags
+                if (target === 4) counter.textContent = '4+';
+                else if (target === 6) counter.textContent = '6';
+                else if (target === 3) counter.textContent = '3';
+            }
+        };
+        
+        window.requestAnimationFrame(step);
+    });
+};
+
+// Intersection Observer for Section Transitions & Stats Counter
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -80px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -104,184 +152,167 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
             
-            // Animate skill tags with stagger effect
+            // Stagger animation for skill tags
             if (entry.target.classList.contains('skill-category')) {
                 const tags = entry.target.querySelectorAll('.skill-tag');
                 tags.forEach((tag, index) => {
                     setTimeout(() => {
                         tag.style.opacity = '1';
                         tag.style.transform = 'translateY(0)';
-                    }, index * 50);
+                    }, index * 40);
                 });
-            }
-            
-            // Animate timeline items
-            if (entry.target.classList.contains('timeline-item')) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateX(0)';
             }
         }
     });
 }, observerOptions);
 
-// Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    // Add initial styles for animations
-    const style = document.createElement('style');
-    style.textContent = `
-        .section-header,
-        .about-content,
-        .timeline-item,
-        .skill-category,
-        .cert-card,
-        .contact-content {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .timeline-item {
-            transform: translateX(-30px);
-        }
-        
-        .skill-tag {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        .animate-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-        
-        .nav-link.active {
-            color: var(--text-primary);
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Observe elements
+    // Observe sections for scroll entry fades
     document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
     document.querySelectorAll('.about-content').forEach(el => observer.observe(el));
     document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
     document.querySelectorAll('.skill-category').forEach(el => observer.observe(el));
     document.querySelectorAll('.cert-card').forEach(el => observer.observe(el));
     document.querySelectorAll('.contact-content').forEach(el => observer.observe(el));
+    
+    // Observer for count-up stats
+    const statsContainer = document.querySelector('.about-stats');
+    if (statsContainer) {
+        const statsObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        statsObserver.observe(statsContainer);
+    }
 });
 
-// Parallax Effect for Hero Section
-const heroBackground = document.querySelector('.grid-background');
+// Interactive SRE Command Line Terminal Simulation
+const terminalCommands = [
+    { type: 'input', text: 'ssh lawrence@salazar.ops' },
+    { type: 'output', text: 'Connecting to salazar.ops (10.0.8.24) on port 22...', class: 'log-info' },
+    { type: 'output', text: 'Connection established. Welcome to Lawrence Salazar\'s server!', class: 'log-success' },
+    { type: 'output', text: 'Last login: Wed May 20 20:41:23 2026 from 192.168.1.100', class: 'log-gray' },
+    { type: 'input', text: 'sre-agent --status' },
+    { type: 'output', text: '[INFO] Initializing telemetry analysis...', class: 'log-info' },
+    { type: 'output', text: '🟢 Host status: ONLINE', class: 'log-success' },
+    { type: 'output', text: '🟢 Experience: 4+ Years SRE Operations', class: 'log-success' },
+    { type: 'output', text: '🟢 Certifications: 6/6 validated', class: 'log-success' },
+    { type: 'output', text: '🟢 SLA Target: 99.99% | Actual: 100.00%', class: 'log-success' },
+    { type: 'input', text: 'kubectl get pods -n production' },
+    { type: 'output', text: 'NAME                               READY   STATUS    RESTARTS   AGE', class: 'log-gray' },
+    { type: 'output', text: 'pod/aws-infrastructure-tf-7d9a8    1/1     Running   0          421d', class: 'log-info' },
+    { type: 'output', text: 'pod/gcp-cloud-architect-v2         1/1     Running   0          260d', class: 'log-info' },
+    { type: 'output', text: 'pod/traffic-envoy-mesh-router      1/1     Running   0          110d', class: 'log-info' },
+    { type: 'output', text: 'pod/prometheus-grafana-alerts      1/1     Running   0          110d', class: 'log-info' },
+    { type: 'input', text: 'ping -c 3 hybrid-cloud-routing' },
+    { type: 'output', text: '64 bytes from 10.0.12.8: icmp_seq=1 ttl=64 time=12.4 ms', class: 'log-gray' },
+    { type: 'output', text: '64 bytes from 10.0.12.8: icmp_seq=2 ttl=64 time=14.2 ms', class: 'log-gray' },
+    { type: 'output', text: '64 bytes from 10.0.12.8: icmp_seq=3 ttl=64 time=11.9 ms', class: 'log-gray' },
+    { type: 'output', text: '--- hybrid-cloud-routing ping statistics ---', class: 'log-gray' },
+    { type: 'output', text: '3 packets transmitted, 3 received, 0% packet loss, time 2002ms', class: 'log-gray' },
+    { type: 'output', text: 'rtt min/avg/max/mdev = 11.9/12.83/14.2/0.99 ms', class: 'log-gray' },
+    { type: 'input', text: 'terraform apply' },
+    { type: 'output', text: 'aws_instance.web_server: Refreshing state... [id=i-0f81dca23b9d]', class: 'log-gray' },
+    { type: 'output', text: 'Apply complete! Resources: 0 added, 0 changed, 0 destroyed.', class: 'log-success' },
+    { type: 'input', text: 'echo "Systems stable. Enjoy exploring!"' },
+    { type: 'output', text: 'Systems stable. Enjoy exploring!', class: 'log-magenta' }
+];
 
+const startTerminalEngine = () => {
+    const outputContainer = document.getElementById('terminal-output');
+    if (!outputContainer) return;
+    
+    let commandIndex = 0;
+    
+    const typeLine = (lineData, callback) => {
+        const lineElement = document.createElement('div');
+        lineElement.className = 'terminal-line';
+        outputContainer.appendChild(lineElement);
+        
+        // Auto scroll terminal body
+        const bodyElement = document.querySelector('.terminal-body');
+        if (bodyElement) bodyElement.scrollTop = bodyElement.scrollHeight;
+        
+        if (lineData.type === 'input') {
+            const promptSpan = document.createElement('span');
+            promptSpan.className = 'terminal-prompt';
+            promptSpan.textContent = '[guest@salazar-ops ~]$ ';
+            lineElement.appendChild(promptSpan);
+            
+            const inputSpan = document.createElement('span');
+            inputSpan.className = 'terminal-input-line';
+            lineElement.appendChild(inputSpan);
+            
+            const cursorSpan = document.createElement('span');
+            cursorSpan.className = 'terminal-cursor';
+            lineElement.appendChild(cursorSpan);
+            
+            let charIndex = 0;
+            const typeChar = () => {
+                if (charIndex < lineData.text.length) {
+                    inputSpan.textContent += lineData.text.charAt(charIndex);
+                    charIndex++;
+                    if (bodyElement) bodyElement.scrollTop = bodyElement.scrollHeight;
+                    setTimeout(typeChar, 30 + Math.random() * 20); // Dynamic human speed
+                } else {
+                    cursorSpan.remove(); // Cleanup cursors
+                    setTimeout(callback, 800); // Pause after typing
+                }
+            };
+            typeChar();
+        } else {
+            // Print command line output instantly
+            lineElement.className = `terminal-line ${lineData.class || ''}`;
+            lineElement.textContent = lineData.text;
+            if (bodyElement) bodyElement.scrollTop = bodyElement.scrollHeight;
+            setTimeout(callback, 150); // Small interval between outputs
+        }
+    };
+    
+    const runSequence = () => {
+        if (commandIndex < terminalCommands.length) {
+            typeLine(terminalCommands[commandIndex], () => {
+                commandIndex++;
+                setTimeout(runSequence, 100);
+            });
+        } else {
+            // Loop sequence after a prolonged pause
+            setTimeout(() => {
+                outputContainer.innerHTML = '';
+                commandIndex = 0;
+                runSequence();
+            }, 6000);
+        }
+    };
+    
+    runSequence();
+};
+
+// Initialize SRE Interactive Terminal Engine on load
+window.addEventListener('load', () => {
+    startTerminalEngine();
+});
+
+// Dynamic Parallax for grid overlay background
+const heroBackground = document.querySelector('.grid-background');
 window.addEventListener('scroll', () => {
     if (heroBackground) {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
-        heroBackground.style.transform = `translate(0, ${rate}px)`;
+        const rate = scrolled * -0.25;
+        heroBackground.style.transform = `translateY(${rate}px)`;
     }
 });
 
-// Code Window Animation
-const codeLines = document.querySelectorAll('.code-content > *');
-codeLines.forEach((line, index) => {
-    line.style.opacity = '0';
-    line.style.transform = 'translateX(-20px)';
-    
-    setTimeout(() => {
-        line.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        line.style.opacity = '1';
-        line.style.transform = 'translateX(0)';
-    }, 1000 + (index * 100));
-});
-
-// Dynamic Copyright Year
-const footer = document.querySelector('.footer p');
-if (footer) {
-    const year = new Date().getFullYear();
-    footer.textContent = `© ${year} Lawrence Nelson Salazar. All rights reserved.`;
-}
-
-// Smooth Page Load Animation
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-    
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// Button Hover Effects with Ripple
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        const ripple = document.createElement('div');
-        ripple.classList.add('ripple');
-        
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
-    });
-});
-
-// Add ripple styles
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
-    .btn {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        transform: scale(0);
-        animation: ripple-animation 0.6s ease-out;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(rippleStyle);
-
-// Console Easter Egg
+// Easter Egg for Developers
 console.log(
-    '%c🚀 Welcome to Lawrence Nelson Salazar\'s Portfolio!',
-    'font-size: 20px; font-weight: bold; color: #000000;'
+    '%c🚀 salazar.ops status: active',
+    'font-family: monospace; font-size: 16px; font-weight: bold; color: #00f2fe; background-color: #05070c; padding: 4px 8px; border-radius: 4px;'
 );
 console.log(
-    '%c👋 Looking for a Site Reliability Engineer? Let\'s connect!',
-    'font-size: 16px; color: #666666;'
+    '%cSite Reliability & Cloud Operations Center. Looking for highly operational infrastructure design? Contact Lawrence!',
+    'font-family: sans-serif; font-size: 12px; color: #94a3b8;'
 );
-console.log(
-    '%c📧 Email: SalazarLawrence@outlook.com',
-    'font-size: 14px; color: #000000;'
-);
-
-// Logo Animation
-const logoContainer = document.querySelector('.logo-container');
-
-if (logoContainer) {
-    logoContainer.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Smooth scroll to top
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
