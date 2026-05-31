@@ -2,6 +2,24 @@
 // JS ENGINE - Portfolio Redesign Interactivity
 // ==========================================================================
 
+// Initialize Lenis Smooth Scrolling
+let lenis;
+if (typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+}
+
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -28,12 +46,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const targetId = this.getAttribute('href');
         const target = document.querySelector(targetId);
         if (target) {
-            const offset = 80; // Height of navbar
-            const targetPosition = target.offsetTop - offset;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            if (lenis) {
+                lenis.scrollTo(target, {
+                    offset: -80
+                });
+            } else {
+                const offset = 80; // Height of navbar
+                const targetPosition = target.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
@@ -200,7 +224,7 @@ const terminalCommands = [
     { type: 'output', text: '[INFO] Initializing telemetry analysis...', class: 'log-info' },
     { type: 'output', text: '🟢 Host status: ONLINE', class: 'log-success' },
     { type: 'output', text: '🟢 Experience: 4+ Years SRE Operations', class: 'log-success' },
-    { type: 'output', text: '🟢 Certifications: 6/6 validated', class: 'log-success' },
+    { type: 'output', text: '🟢 Systems telemetry: ACTIVE', class: 'log-success' },
     { type: 'output', text: '🟢 SLA Target: 99.99% | Actual: 100.00%', class: 'log-success' },
     { type: 'input', text: 'kubectl get pods -n production' },
     { type: 'output', text: 'NAME                               READY   STATUS    RESTARTS   AGE', class: 'log-gray' },
