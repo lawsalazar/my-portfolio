@@ -69,12 +69,12 @@ const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 80) {
-        navbar.style.background = 'rgba(5, 7, 12, 0.9)';
-        navbar.style.borderBottomColor = 'rgba(0, 242, 254, 0.1)';
-        navbar.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.5)';
+        navbar.style.background = 'rgba(250, 246, 235, 0.96)';
+        navbar.style.borderBottomColor = 'var(--text-primary)';
+        navbar.style.boxShadow = '0 4px 20px rgba(13, 13, 13, 0.06)';
     } else {
-        navbar.style.background = 'rgba(5, 7, 12, 0.75)';
-        navbar.style.borderBottomColor = 'rgba(255, 255, 255, 0.05)';
+        navbar.style.background = 'rgba(250, 246, 235, 0.9)';
+        navbar.style.borderBottomColor = 'var(--border)';
         navbar.style.boxShadow = 'none';
     }
 });
@@ -292,11 +292,11 @@ const startTerminalEngine = () => {
     runSequence();
 };
 
-// Interactive Mouse-Reactive Parallax Background (Antigravity Style)
+// Interactive Mouse-Reactive Parallax Target Guidance Background
 const initAntigravityBackground = () => {
-    const orb1 = document.querySelector('.orb-1');
-    const orb2 = document.querySelector('.orb-2');
-    if (!orb1 || !orb2) return;
+    const ring1 = document.querySelector('.ring-1');
+    const ring2 = document.querySelector('.ring-2');
+    if (!ring1 || !ring2) return;
 
     let mouseX = 0, mouseY = 0;
     let curX1 = 0, curY1 = 0;
@@ -310,15 +310,15 @@ const initAntigravityBackground = () => {
 
     const tick = () => {
         // Smooth spring physics interpolation (damping lag)
-        curX1 += (mouseX * 90 - curX1) * 0.06;
-        curY1 += (mouseY * 90 - curY1) * 0.06;
+        curX1 += (mouseX * 70 - curX1) * 0.05;
+        curY1 += (mouseY * 70 - curY1) * 0.05;
 
-        curX2 += (-mouseX * 130 - curX2) * 0.04;
-        curY2 += (-mouseY * 130 - curY2) * 0.04;
+        curX2 += (-mouseX * 110 - curX2) * 0.04;
+        curY2 += (-mouseY * 110 - curY2) * 0.04;
 
-        // Apply high-performance 3D transforms
-        orb1.style.transform = `translate3d(${curX1}px, ${curY1}px, 0)`;
-        orb2.style.transform = `translate3d(${curX2}px, ${curY2}px, 0)`;
+        // Apply high-performance 3D transforms with rotation to represent steering mechanics
+        ring1.style.transform = `translate3d(${curX1}px, ${curY1}px, 0) rotate(${curX1 * 0.15}deg)`;
+        ring2.style.transform = `translate3d(${curX2}px, ${curY2}px, 0) rotate(${curX2 * -0.1}deg)`;
 
         requestAnimationFrame(tick);
     };
@@ -336,7 +336,7 @@ const heroBackground = document.querySelector('.grid-background');
 window.addEventListener('scroll', () => {
     if (heroBackground) {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.25;
+        const rate = scrolled * -0.15;
         heroBackground.style.transform = `translateY(${rate}px)`;
     }
 });
@@ -344,9 +344,9 @@ window.addEventListener('scroll', () => {
 // Easter Egg for Developers
 console.log(
     '%c🚀 ops.local status: active',
-    'font-family: monospace; font-size: 16px; font-weight: bold; color: #00f2fe; background-color: #05070c; padding: 4px 8px; border-radius: 4px;'
+    'font-family: monospace; font-size: 16px; font-weight: bold; color: #E53A27; background-color: #FAF6EB; padding: 4px 8px; border: 1.5px solid #0D0D0D;'
 );
 console.log(
     '%cSite Reliability & Cloud Operations Center. Looking for highly operational infrastructure design? Contact Lawrence!',
-    'font-family: sans-serif; font-size: 12px; color: #94a3b8;'
+    'font-family: sans-serif; font-size: 12px; color: #7E7A70;'
 );
