@@ -505,10 +505,10 @@ h4 { font-size: 1.2rem; }
 .profile-image-container {
     width: 320px;
     height: 320px;
-    border: 2px solid var(--text-primary);
-    border-radius: 50%;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 8px 8px 0 var(--accent-red);
+    box-shadow: var(--shadow-bold);
     transition: var(--transition-normal);
     background-color: var(--bg-card);
     display: flex;
@@ -518,7 +518,7 @@ h4 { font-size: 1.2rem; }
 
 .profile-image-container:hover {
     transform: translateY(-4px);
-    box-shadow: 12px 12px 0 var(--text-primary);
+    box-shadow: var(--shadow-hover);
 }
 
 .profile-image {
@@ -697,59 +697,7 @@ h4 { font-size: 1.2rem; }
     line-height: 1.8;
 }
 
-.about-stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 4rem;
-}
 
-/* Structural Minimalist Stat Cards */
-.stat-card {
-    background: var(--bg-card);
-    border: 1.5px solid var(--text-primary);
-    border-radius: 0;
-    padding: 1.5rem 1.75rem;
-    text-align: left;
-    transition: var(--transition-normal);
-    position: relative;
-    box-shadow: var(--shadow-flat);
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 100%;
-    background: var(--accent-red);
-}
-
-.stat-card:hover {
-    transform: translateX(4px);
-    background: var(--bg-card-hover);
-    box-shadow: var(--shadow-bold);
-}
-
-.stat-number {
-    font-family: var(--font-heading);
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    line-height: 1;
-    margin-bottom: 0.25rem;
-    display: block;
-    letter-spacing: -0.05em;
-}
-
-.stat-label {
-    color: var(--text-secondary);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
 
 /* ==========================================================================
    Experience Section (Strict Mechanical Grid Timeline)
@@ -1308,11 +1256,6 @@ h4 { font-size: 1.2rem; }
         margin-top: 0.25rem;
     }
     
-    .about-stats-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 3rem;
-    }
 }
 
 @media (max-width: 480px) {
