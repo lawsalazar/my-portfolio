@@ -495,10 +495,42 @@ h4 { font-size: 1.2rem; }
     box-shadow: var(--shadow-bold);
 }
 
-/* SRE Interactive Terminal - Redesigned as a Typewriter Card on Warm Paper */
+/* SRE Interactive Terminal & Profile Image - Redesigned as a Typewriter Card on Warm Paper */
 .hero-visual {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.profile-image-container {
+    width: 320px;
+    height: 320px;
+    border: 2px solid var(--text-primary);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 8px 8px 0 var(--accent-red);
+    transition: var(--transition-normal);
+    background-color: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-image-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 12px 12px 0 var(--text-primary);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transition: var(--transition-normal);
+}
+
+.profile-image-container:hover .profile-image {
+    filter: grayscale(0%);
 }
 
 .terminal-window {
@@ -665,10 +697,11 @@ h4 { font-size: 1.2rem; }
     line-height: 1.8;
 }
 
-.about-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.about-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 4rem;
 }
 
 /* Structural Minimalist Stat Cards */
@@ -1274,6 +1307,12 @@ h4 { font-size: 1.2rem; }
         align-items: flex-start;
         margin-top: 0.25rem;
     }
+    
+    .about-stats-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 3rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1301,6 +1340,11 @@ h4 { font-size: 1.2rem; }
     .contact-link {
         width: 100%;
         justify-content: center;
+    }
+    
+    .profile-image-container {
+        width: 240px;
+        height: 240px;
     }
 }
 
