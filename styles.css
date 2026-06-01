@@ -1115,12 +1115,42 @@ h4 { font-size: 1.2rem; }
 }
 
 .footer p {
+    margin: 0;
+}
+
+.footer-attribution {
+    margin-bottom: 0.75rem !important;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-family: var(--font-heading);
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+.footer-copyright {
     color: var(--text-muted);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-family: var(--font-heading);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.heart-emoji {
+    display: inline-block;
+    color: var(--accent-red);
+    animation: heartBeat 1.4s infinite ease-in-out;
+    margin: 0 3px;
+    transform-origin: center;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.18); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.18); }
+    70% { transform: scale(1); }
 }
 
 /* ==========================================================================
